@@ -103,8 +103,7 @@ class GridView: UIView {
 
   private func makeTopView() -> UIView {
     let view = UIView()
-    view.backgroundColor = UIColor.white
-
+    view.backgroundColor = Config.Grid.TopView.barBackgroundColor
     return view
   }
 
@@ -153,11 +152,11 @@ class GridView: UIView {
 
   private func makeCollectionView() -> UICollectionView {
     let layout = UICollectionViewFlowLayout()
-    layout.minimumInteritemSpacing = 2
-    layout.minimumLineSpacing = 2
+    layout.minimumInteritemSpacing = Config.Grid.Dimension.minimumInteritemSpacing
+    layout.minimumLineSpacing = Config.Grid.Dimension.minimumLineSpacing
 
     let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    view.backgroundColor = UIColor.white
+    view.backgroundColor = Config.Grid.CollectionView.backgroundColor
 
     return view
   }
