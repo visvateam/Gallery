@@ -20,12 +20,18 @@ class FrameView: UIView {
   // MARK: - Setup
 
   private func setup() {
-    layer.addSublayer(gradientLayer)
-    layer.borderColor = Config.Grid.FrameView.borderColor.cgColor
-    layer.borderWidth = 3
-
-    addSubview(label)
-    label.g_pinCenter()
+//    layer.addSublayer(gradientLayer)
+//    layer.borderColor = Config.Grid.FrameView.borderColor.cgColor
+//    layer.borderWidth = 3
+//
+//    addSubview(label)
+//    label.g_pinCenter()
+    let newView = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+    newView.backgroundColor = UIColor.purple
+    
+    newView.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
+    addSubview(newView)
+    newView.center.y = self.center.y + 25
   }
 
   // MARK: - Layout
