@@ -43,20 +43,38 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
   func setup() {
     addGestureRecognizer(tapGR)
 
-    [closeButton, flashButton, rotateButton, bottomContainer].forEach {
-      addSubview($0)
+    if Config.CloseButton.usingExternalClostButton {
+        [flashButton, rotateButton, bottomContainer].forEach {
+            addSubview($0)
+        }
+    } else {
+        [closeButton, flashButton, rotateButton, bottomContainer].forEach {
+            addSubview($0)
+        }
     }
-
+    
     [bottomView, shutterButton].forEach {
       bottomContainer.addSubview($0)
     }
 
-    [stackView, doneButton].forEach {
-      bottomView.addSubview($0)
+    if Config.DoneButton.usingExternalDoneButton {
+        [stackView].forEach {
+            bottomView.addSubview($0)
+        }
+    } else {
+        [stackView, doneButton].forEach {
+            bottomView.addSubview($0)
+        }
     }
-
-    [closeButton, flashButton, rotateButton].forEach {
-      $0.g_addShadow()
+    
+    if Config.CloseButton.usingExternalClostButton {
+        [flashButton, rotateButton].forEach {
+            $0.g_addShadow()
+        }
+    } else {
+        [closeButton, flashButton, rotateButton].forEach {
+            $0.g_addShadow()
+        }
     }
 
     rotateOverlayView.addSubview(blurView)
@@ -64,8 +82,10 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     insertSubview(focusImageView, belowSubview: bottomContainer)
     insertSubview(shutterOverlayView, belowSubview: bottomContainer)
 
-    closeButton.g_pin(on: .left)
-    closeButton.g_pin(size: CGSize(width: 44, height: 44))
+    if !Config.CloseButton.usingExternalClostButton {
+        closeButton.g_pin(on: .left)
+        closeButton.g_pin(size: CGSize(width: 44, height: 44))
+    }
 
     flashButton.g_pin(on: .centerY, view: closeButton)
     flashButton.g_pin(on: .centerX)
@@ -97,8 +117,10 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     shutterButton.g_pinCenter()
     shutterButton.g_pin(size: CGSize(width: 60, height: 60))
     
-    doneButton.g_pin(on: .centerY)
-    doneButton.g_pin(on: .right, constant: -38)
+    if !Config.DoneButton.usingExternalDoneButton {
+        doneButton.g_pin(on: .centerY)
+        doneButton.g_pin(on: .right, constant: -38)
+    }
 
     rotateOverlayView.g_pinEdges()
     blurView.g_pinEdges()
