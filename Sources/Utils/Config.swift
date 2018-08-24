@@ -57,7 +57,7 @@ public struct Config {
   public struct Grid {
 
     public struct TopView {
-        public static var barBackgroundColor = UIColor.white
+        public static var barBackgroundColor: UIColor = UIColor.white
     }
     
     public struct CloseButton {
