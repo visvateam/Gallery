@@ -56,10 +56,18 @@ public struct Config {
 
   public struct Grid {
 
+    public struct TopView {
+        public static var barBackgroundColor = UIColor.white
+    }
+    
     public struct CloseButton {
       public static var tintColor: UIColor = UIColor(red: 109/255, green: 107/255, blue: 132/255, alpha: 1)
     }
 
+    public struct CollectionView {
+        public static var backgroundColor: UIColor = UIColor.white
+    }
+    
     public struct ArrowButton {
       public static var tintColor: UIColor = UIColor(red: 110/255, green: 117/255, blue: 131/255, alpha: 1)
     }
@@ -69,10 +77,15 @@ public struct Config {
       public static var borderColor: UIColor = UIColor(red: 0, green: 239/255, blue: 155/255, alpha: 1)
     }
 
-    struct Dimension {
-      static let columnCount: CGFloat = 4
-      static let cellSpacing: CGFloat = 2
+    public struct Dimension {
+        public static var columnCount: CGFloat = 4
+        public static var cellSpacing: CGFloat = 4
+        public static var minimumInteritemSpacing: CGFloat = 2
+        public static var minimumLineSpacing: CGFloat = 2
     }
+    
+    public static var hidingBottomBar = false
+    
   }
 
   public struct EmptyView {
@@ -115,4 +128,12 @@ public struct Config {
     public static var portraitSize: CGSize = CGSize(width: 360, height: 640)
     public static var landscapeSize: CGSize = CGSize(width: 640, height: 360)
   }
+    
+  public struct DoneButton {
+    public static var usingExternalDoneButton = false
+  }
+  public struct CloseButton {
+    public static var usingExternalClostButton = false
+  }
+    
 }

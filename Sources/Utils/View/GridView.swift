@@ -34,13 +34,21 @@ class GridView: UIView {
     [collectionView, bottomView, topView, emptyView, loadingIndicator].forEach {
       addSubview($0)
     }
-
-    [closeButton, arrowButton].forEach {
-      topView.addSubview($0)
+    
+    if Config.CloseButton.usingExternalClostButton {
+        [arrowButton].forEach {
+            topView.addSubview($0)
+        }
+    } else {
+        [closeButton, arrowButton].forEach {
+            topView.addSubview($0)
+        }
     }
 
-    [bottomBlurView, doneButton].forEach {
-        bottomView.addSubview($0)
+    if !Config.Grid.hidingBottomBar {
+        [bottomBlurView, doneButton].forEach {
+            bottomView.addSubview($0)
+        }
     }
 
     Constraint.on(
@@ -62,25 +70,33 @@ class GridView: UIView {
       )
     }
 
-    bottomView.g_pinDownward()
-    bottomView.g_pin(height: 80)
+    if !Config.Grid.hidingBottomBar {
+        bottomView.g_pinDownward()
+        bottomView.g_pin(height: 80)
+    }
 
     emptyView.g_pinEdges(view: collectionView)
     
     collectionView.g_pinDownward()
     collectionView.g_pin(on: .top, view: topView, on: .bottom, constant: 1)
 
-    bottomBlurView.g_pinEdges()
+    if !Config.Grid.hidingBottomBar {
+        bottomBlurView.g_pinEdges()
+    }
 
-    closeButton.g_pin(on: .top)
-    closeButton.g_pin(on: .left)
-    closeButton.g_pin(size: CGSize(width: 40, height: 40))
+    if !Config.CloseButton.usingExternalClostButton {
+        closeButton.g_pin(on: .top)
+        closeButton.g_pin(on: .left)
+        closeButton.g_pin(size: CGSize(width: 40, height: 40))
+    }
 
     arrowButton.g_pinCenter()
     arrowButton.g_pin(height: 40)
 
-    doneButton.g_pin(on: .centerY)
-    doneButton.g_pin(on: .right, constant: -38)
+    if Config.DoneButton.usingExternalDoneButton {
+        doneButton.g_pin(on: .centerY)
+        doneButton.g_pin(on: .right, constant: -38)
+    }
   }
 
   // MARK: - Controls

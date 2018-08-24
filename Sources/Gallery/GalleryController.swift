@@ -15,6 +15,12 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
 
   public let cart = Cart()
 
+  public func externalDoneButtonTapped() {
+    if Config.DoneButton.usingExternalDoneButton {
+        EventHub.shared.doneWithImages?()
+    }
+  }
+    
   // MARK: - Init
 
   public required init() {
