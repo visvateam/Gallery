@@ -87,23 +87,39 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
         closeButton.g_pin(size: CGSize(width: 44, height: 44))
     }
 
-    flashButton.g_pin(on: .centerY, view: closeButton)
+    rotateButton.g_pin(on: .right)
+    rotateButton.g_pin(size: CGSize(width: 44, height: 44))
+    
+    if !Config.CloseButton.usingExternalClostButton {
+        flashButton.g_pin(on: .centerY, view: closeButton)
+    } else {
+        flashButton.g_pin(on: .centerY, view: rotateButton)
+    }
     flashButton.g_pin(on: .centerX)
     flashButton.g_pin(size: CGSize(width: 60, height: 44))
 
-    rotateButton.g_pin(on: .right)
-    rotateButton.g_pin(size: CGSize(width: 44, height: 44))
-
     if #available(iOS 11, *) {
-      Constraint.on(
-        closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-        rotateButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
-      )
+        if !Config.CloseButton.usingExternalClostButton {
+            Constraint.on(
+                rotateButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+            )
+        } else {
+            Constraint.on(
+                closeButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+                rotateButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
+            )
+        }
     } else {
-      Constraint.on(
-        closeButton.topAnchor.constraint(equalTo: topAnchor),
-        rotateButton.topAnchor.constraint(equalTo: topAnchor)
-      )
+        if !Config.CloseButton.usingExternalClostButton {
+            Constraint.on(
+                rotateButton.topAnchor.constraint(equalTo: topAnchor)
+            )
+        } else {
+            Constraint.on(
+                closeButton.topAnchor.constraint(equalTo: topAnchor),
+                rotateButton.topAnchor.constraint(equalTo: topAnchor)
+            )
+        }
     }
 
     bottomContainer.g_pinDownward()
