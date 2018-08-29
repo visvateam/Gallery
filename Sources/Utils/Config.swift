@@ -72,6 +72,10 @@ public struct Config {
       public static var tintColor: UIColor = UIColor(red: 110/255, green: 117/255, blue: 131/255, alpha: 1)
     }
     
+    public struct ArrowLabel {
+        public static var font: UIFont = UIFont.systemFont(ofSize: 1)
+    }
+
     public struct AlbumTitle {
         public static var font: UIFont = UIFont.systemFont(ofSize: 1)
     }
