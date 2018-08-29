@@ -118,6 +118,8 @@ public struct Config {
     public static var unselectedFont: UIFont = UIFont.systemFont(ofSize: 40)
     public static var selectedColor: UIColor = .red
     public static var unselectedColor: UIColor = .blue
+    public static var photoTitleText: String = ""
+    public static var cameraTitleText: String = ""
   }
 
   public struct Font {
