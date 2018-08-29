@@ -4,7 +4,8 @@ class FrameView: UIView {
 
   lazy var label: UILabel = self.makeLabel()
   lazy var gradientLayer: CAGradientLayer = self.makeGradientLayer()
-
+  lazy var selectedImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Config.Grid.SelectedImage.Width, height: Config.Grid.SelectedImage.Height))
+    
   // MARK: - Initialization
 
   override init(frame: CGRect) {
@@ -20,18 +21,8 @@ class FrameView: UIView {
   // MARK: - Setup
 
   private func setup() {
-//    layer.addSublayer(gradientLayer)
-//    layer.borderColor = Config.Grid.FrameView.borderColor.cgColor
-//    layer.borderWidth = 3
-//
-//    addSubview(label)
-//    label.g_pinCenter()
-    let newView = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-    newView.backgroundColor = UIColor.purple
-    
-    newView.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
-    addSubview(newView)
-    newView.center.y = self.center.y + 25
+    selectedImageView.image = Config.Grid.SelectedImage.ImageIcon
+    addSubview(selectedImageView)
   }
 
   // MARK: - Layout
@@ -40,13 +31,14 @@ class FrameView: UIView {
     super.layoutSubviews()
 
     gradientLayer.frame = bounds
+    selectedImageView.center = self.center
   }
 
   // MARK: - Controls
 
   private func makeLabel() -> UILabel {
     let label = UILabel()
-    label.font = Config.Font.Main.regular.withSize(40)
+    label.font = Config.Font.Main.regular//.withSize(40)
     label.textColor = UIColor.white
 
     return label

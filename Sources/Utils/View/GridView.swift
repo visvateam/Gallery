@@ -35,7 +35,7 @@ class GridView: UIView {
       addSubview($0)
     }
     
-    if Config.CloseButton.usingExternalClostButton {
+    if Config.CloseButton.usingExternalCloseButton {
         [arrowButton].forEach {
             topView.addSubview($0)
         }
@@ -84,7 +84,7 @@ class GridView: UIView {
         bottomBlurView.g_pinEdges()
     }
 
-    if !Config.CloseButton.usingExternalClostButton {
+    if !Config.CloseButton.usingExternalCloseButton {
         closeButton.g_pin(on: .top)
         closeButton.g_pin(on: .left)
         closeButton.g_pin(size: CGSize(width: 40, height: 40))

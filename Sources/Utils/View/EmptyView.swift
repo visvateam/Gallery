@@ -34,7 +34,7 @@ class EmptyView: UIView {
   private func makeLabel() -> UILabel {
     let label = UILabel()
     label.textColor = Config.EmptyView.textColor
-    label.font = Config.Font.Text.regular.withSize(14)
+    label.font = Config.Font.Text.regular//.withSize(14)
     label.text = "Gallery.EmptyView.Text".g_localize(fallback: "Nothing to show")
 
     return label

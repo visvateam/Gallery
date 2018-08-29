@@ -71,6 +71,10 @@ public struct Config {
     public struct ArrowButton {
       public static var tintColor: UIColor = UIColor(red: 110/255, green: 117/255, blue: 131/255, alpha: 1)
     }
+    
+    public struct AlbumTitle {
+        public static var font: UIFont = UIFont.systemFont(ofSize: 1)
+    }
 
     public struct FrameView {
       public static var fillColor: UIColor = UIColor(red: 50/255, green: 51/255, blue: 59/255, alpha: 1)
@@ -86,6 +90,11 @@ public struct Config {
     
     public static var hidingBottomBar = false
     
+    public struct SelectedImage {
+        public static var ImageIcon: UIImage? = nil
+        public static var Width: CGFloat = 0
+        public static var Height: CGFloat = 0
+    }
   }
 
   public struct EmptyView {
@@ -102,6 +111,13 @@ public struct Config {
       public static var highlightedTextColor: UIColor = UIColor.lightGray
       public static var backgroundColor = UIColor(red: 40/255, green: 170/255, blue: 236/255, alpha: 1)
     }
+  }
+    
+  public struct SwitchingButtons {
+    public static var selectedFont: UIFont = UIFont.systemFont(ofSize: 1)
+    public static var unselectedFont: UIFont = UIFont.systemFont(ofSize: 40)
+    public static var selectedColor: UIColor = .red
+    public static var unselectedColor: UIColor = .blue
   }
 
   public struct Font {
@@ -133,7 +149,7 @@ public struct Config {
     public static var usingExternalDoneButton = false
   }
   public struct CloseButton {
-    public static var usingExternalClostButton = false
+    public static var usingExternalCloseButton = false
   }
     
 }

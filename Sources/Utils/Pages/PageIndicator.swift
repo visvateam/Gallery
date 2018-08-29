@@ -70,8 +70,9 @@ class PageIndicator: UIView {
   func makeButton(_ title: String) -> UIButton {
     let button = UIButton(type: .custom)
     button.setTitle(title, for: UIControlState.normal)
-    button.setTitleColor(Config.PageIndicator.textColor, for: UIControlState.normal)
-    button.setTitleColor(UIColor.gray, for: .highlighted)
+//    button.setTitleColor(Config.PageIndicator.textColor, for: UIControlState.normal)
+//    button.setTitleColor(UIColor.gray, for: .highlighted)
+  button.setTitleColor(Config.SwitchingButtons.unselectedColor, for: .normal)
     button.backgroundColor = Config.PageIndicator.backgroundColor
     button.addTarget(self, action: #selector(buttonTouched(_:)), for: .touchUpInside)
     button.titleLabel?.font = buttonFont(false)
@@ -98,6 +99,7 @@ class PageIndicator: UIView {
   func select(index: Int, animated: Bool = true) {
     for (i, b) in buttons.enumerated() {
       b.titleLabel?.font = buttonFont(i == index)
+      b.setTitleColor(buttonColor(i == index), for: .normal)
     }
 
     UIView.animate(withDuration: animated ? 0.25 : 0.0,
@@ -113,7 +115,11 @@ class PageIndicator: UIView {
 
   // MARK: - Helper
 
-  func buttonFont(_ selected: Bool) -> UIFont {
-    return selected ? Config.Font.Main.bold.withSize(14) : Config.Font.Main.regular.withSize(14)
-  }
+    func buttonFont(_ selected: Bool) -> UIFont {
+      return selected ? Config.SwitchingButtons.selectedFont : Config.SwitchingButtons.unselectedFont
+    }
+    
+    func buttonColor(_ selected: Bool) -> UIColor {
+      return selected ? Config.SwitchingButtons.selectedColor : Config.SwitchingButtons.unselectedColor
+    }
 }
