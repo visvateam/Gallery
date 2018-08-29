@@ -87,6 +87,10 @@ class ImagesController: UIViewController {
   @objc func stackViewTouched(_ stackView: StackView) {
     EventHub.shared.stackViewTouched?()
   }
+    
+  func numSelectedImagesChanged() {
+    EventHub.shared.updateNumImagesSelected?()
+  }
 
   // MARK: - Logic
 
@@ -159,7 +163,7 @@ extension ImagesController: CartDelegate {
   func cart(_ cart: Cart, didAdd image: Image, newlyTaken: Bool) {
     stackView.reload(cart.images, added: true)
     refreshView()
-
+    numSelectedImagesChanged()
     if newlyTaken {
       refreshSelectedAlbum()
     }
@@ -167,6 +171,7 @@ extension ImagesController: CartDelegate {
 
   func cart(_ cart: Cart, didRemove image: Image) {
     stackView.reload(cart.images)
+    numSelectedImagesChanged()
     refreshView()
   }
 
@@ -175,6 +180,7 @@ extension ImagesController: CartDelegate {
     refreshView()
     refreshSelectedAlbum()
   }
+    
 }
 
 extension ImagesController: DropdownControllerDelegate {
