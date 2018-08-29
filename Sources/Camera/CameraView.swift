@@ -43,7 +43,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
   func setup() {
     addGestureRecognizer(tapGR)
 
-    if Config.CloseButton.usingExternalClostButton {
+    if Config.CloseButton.usingExternalCloseButton {
         [flashButton, rotateButton, bottomContainer].forEach {
             addSubview($0)
         }
@@ -67,7 +67,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    if Config.CloseButton.usingExternalClostButton {
+    if Config.CloseButton.usingExternalCloseButton {
         [flashButton, rotateButton].forEach {
             $0.g_addShadow()
         }
@@ -82,7 +82,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     insertSubview(focusImageView, belowSubview: bottomContainer)
     insertSubview(shutterOverlayView, belowSubview: bottomContainer)
 
-    if !Config.CloseButton.usingExternalClostButton {
+    if !Config.CloseButton.usingExternalCloseButton {
         closeButton.g_pin(on: .left)
         closeButton.g_pin(size: CGSize(width: 44, height: 44))
     }
@@ -90,7 +90,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     rotateButton.g_pin(on: .right)
     rotateButton.g_pin(size: CGSize(width: 44, height: 44))
     
-    if Config.CloseButton.usingExternalClostButton {
+    if Config.CloseButton.usingExternalCloseButton {
         flashButton.g_pin(on: .centerY, view: rotateButton)
     } else {
         flashButton.g_pin(on: .centerY, view: closeButton)
@@ -99,7 +99,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
     flashButton.g_pin(size: CGSize(width: 60, height: 44))
 
     if #available(iOS 11, *) {
-        if Config.CloseButton.usingExternalClostButton {
+        if Config.CloseButton.usingExternalCloseButton {
             Constraint.on(
                 rotateButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor)
             )
@@ -110,7 +110,7 @@ class CameraView: UIView, UIGestureRecognizerDelegate {
             )
         }
     } else {
-        if Config.CloseButton.usingExternalClostButton {
+        if Config.CloseButton.usingExternalCloseButton {
             Constraint.on(
                 rotateButton.topAnchor.constraint(equalTo: topAnchor)
             )
