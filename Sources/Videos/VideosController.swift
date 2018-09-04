@@ -167,7 +167,7 @@ extension VideosController: UICollectionViewDataSource, UICollectionViewDelegate
     let item = items[(indexPath as NSIndexPath).item]
 
     cell.configure(item)
-    cell.frameView.label.isHidden = true
+//    cell.frameView.label.isHidden = true
     configureFrameView(cell, indexPath: indexPath)
 
     return cell

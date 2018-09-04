@@ -24,9 +24,9 @@ class VideoCell: ImageCell {
   override func setup() {
     super.setup()
 
-    [bottomOverlay, cameraImageView, durationLabel].forEach {
-      self.insertSubview($0, belowSubview: self.highlightOverlay)
-    }
+    //    [bottomOverlay, cameraImageView, durationLabel].forEach {
+    //      self.insertSubview($0, belowSubview: self.highlightOverlay)
+    //    }
 
     bottomOverlay.g_pinDownward()
     bottomOverlay.g_pin(height: 16)
