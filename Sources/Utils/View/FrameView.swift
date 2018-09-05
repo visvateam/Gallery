@@ -2,8 +2,8 @@ import UIKit
 
 class FrameView: UIView {
 
-  lazy var label: UILabel = self.makeLabel()
-  lazy var gradientLayer: CAGradientLayer = self.makeGradientLayer()
+//  lazy var label: UILabel = self.makeLabel()
+//  lazy var gradientLayer: CAGradientLayer = self.makeGradientLayer()
   lazy var selectedImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Config.Grid.SelectedImage.Width, height: Config.Grid.SelectedImage.Height))
     
   // MARK: - Initialization
@@ -29,28 +29,26 @@ class FrameView: UIView {
 
   override func layoutSubviews() {
     super.layoutSubviews()
-
-    gradientLayer.frame = bounds
     selectedImageView.center = self.center
   }
 
   // MARK: - Controls
 
-  private func makeLabel() -> UILabel {
-    let label = UILabel()
-    label.font = Config.Font.Main.regular//.withSize(40)
-    label.textColor = UIColor.white
-
-    return label
-  }
-
-  private func makeGradientLayer() -> CAGradientLayer {
-    let layer = CAGradientLayer()
-    layer.colors = [
-      Config.Grid.FrameView.fillColor.withAlphaComponent(0.25).cgColor,
-      Config.Grid.FrameView.fillColor.withAlphaComponent(0.4).cgColor
-    ]
-
-    return layer
-  }
+//  private func makeLabel() -> UILabel {
+//    let label = UILabel()
+//    label.font = Config.Font.Main.regular//.withSize(40)
+//    label.textColor = UIColor.white
+//
+//    return label
+//  }
+//
+//  private func makeGradientLayer() -> CAGradientLayer {
+//    let layer = CAGradientLayer()
+//    layer.colors = [
+//      Config.Grid.FrameView.fillColor.withAlphaComponent(0.25).cgColor,
+//      Config.Grid.FrameView.fillColor.withAlphaComponent(0.4).cgColor
+//    ]
+//
+//    return layer
+//  }
 }

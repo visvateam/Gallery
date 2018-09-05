@@ -72,6 +72,10 @@ public struct Config {
       public static var tintColor: UIColor = UIColor(red: 110/255, green: 117/255, blue: 131/255, alpha: 1)
     }
     
+    public struct ArrowLabel {
+        public static var font: UIFont = UIFont.systemFont(ofSize: 1)
+    }
+
     public struct AlbumTitle {
         public static var font: UIFont = UIFont.systemFont(ofSize: 1)
     }
@@ -94,6 +98,11 @@ public struct Config {
         public static var ImageIcon: UIImage? = nil
         public static var Width: CGFloat = 0
         public static var Height: CGFloat = 0
+    }
+    
+    public struct Animation {
+        public static var SelectTime: Double = 0.5
+        public static var DeselectTime: Double = 0.2
     }
   }
 

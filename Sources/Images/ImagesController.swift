@@ -87,6 +87,10 @@ class ImagesController: UIViewController {
   @objc func stackViewTouched(_ stackView: StackView) {
     EventHub.shared.stackViewTouched?()
   }
+    
+  func numSelectedImagesChanged() {
+    EventHub.shared.updateNumImagesSelected?()
+  }
 
   // MARK: - Logic
 
@@ -159,7 +163,7 @@ extension ImagesController: CartDelegate {
   func cart(_ cart: Cart, didAdd image: Image, newlyTaken: Bool) {
     stackView.reload(cart.images, added: true)
     refreshView()
-
+    numSelectedImagesChanged()
     if newlyTaken {
       refreshSelectedAlbum()
     }
@@ -167,6 +171,7 @@ extension ImagesController: CartDelegate {
 
   func cart(_ cart: Cart, didRemove image: Image) {
     stackView.reload(cart.images)
+    numSelectedImagesChanged()
     refreshView()
   }
 
@@ -175,6 +180,7 @@ extension ImagesController: CartDelegate {
     refreshView()
     refreshSelectedAlbum()
   }
+    
 }
 
 extension ImagesController: DropdownControllerDelegate {
@@ -203,7 +209,7 @@ extension ImagesController: UICollectionViewDataSource, UICollectionViewDelegate
     let item = items[(indexPath as NSIndexPath).item]
 
     cell.configure(item)
-    configureFrameView(cell, indexPath: indexPath)
+//    configureFrameView(cell, indexPath: indexPath)
 
     return cell
   }
@@ -221,32 +227,52 @@ extension ImagesController: UICollectionViewDataSource, UICollectionViewDelegate
     let item = items[(indexPath as NSIndexPath).item]
 
     if cart.images.contains(item) {
+      if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell { deselectAnimate(cell: cell) }
       cart.remove(item)
     } else {
       if Config.Camera.imageLimit == 0 || Config.Camera.imageLimit > cart.images.count{
         cart.add(item)
+        if let cell = collectionView.cellForItem(at: indexPath) as? ImageCell { selectAnimate(cell: cell) }
       }
     }
 
-    configureFrameViews()
+//    configureFrameViews()
   }
 
-  func configureFrameViews() {
-    for case let cell as ImageCell in gridView.collectionView.visibleCells {
-      if let indexPath = gridView.collectionView.indexPath(for: cell) {
-        configureFrameView(cell, indexPath: indexPath)
-      }
+//  func configureFrameViews() {
+//    for case let cell as ImageCell in gridView.collectionView.visibleCells {
+//      if let indexPath = gridView.collectionView.indexPath(for: cell) {
+//        configureFrameView(cell, indexPath: indexPath)
+//      }
+//    }
+//  }
+
+//  func configureFrameView(_ cell: ImageCell, indexPath: IndexPath) {
+//    let item = items[(indexPath as NSIndexPath).item]
+//
+//    if let index = cart.images.index(of: item) {
+//      cell.frameView.g_quickFade()
+//      cell.frameView.label.text = "\(index + 1)"
+//    } else {
+//      cell.frameView.alpha = 0
+//    }
+//  }
+    
+    func selectAnimate(cell: ImageCell) {
+        cell.frameView.alpha = 1
+        
+        cell.frameView.transform = CGAffineTransform.init(scaleX: 0.0, y: 0.0)
+        UIView.animate(withDuration: Config.Grid.Animation.SelectTime, delay: 0, usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
+                        cell.frameView.transform = .identity
+        }, completion: nil)
     }
-  }
-
-  func configureFrameView(_ cell: ImageCell, indexPath: IndexPath) {
-    let item = items[(indexPath as NSIndexPath).item]
-
-    if let index = cart.images.index(of: item) {
-      cell.frameView.g_quickFade()
-      cell.frameView.label.text = "\(index + 1)"
-    } else {
-      cell.frameView.alpha = 0
+    func deselectAnimate(cell: ImageCell) {
+        UIView.animate(withDuration: Config.Grid.Animation.DeselectTime, delay: 0, usingSpringWithDamping: 0.7,
+                       initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
+                        cell.frameView.transform = CGAffineTransform.init(scaleX: 0.01, y: 0.01)
+                        cell.frameView.alpha = 0
+        }, completion: nil)
     }
-  }
+
 }
