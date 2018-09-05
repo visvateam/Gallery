@@ -99,6 +99,11 @@ public struct Config {
         public static var Width: CGFloat = 0
         public static var Height: CGFloat = 0
     }
+    
+    public struct Animation {
+        public static var SelectTime: Double = 0.5
+        public static var DeselectTime: Double = 0.2
+    }
   }
 
   public struct EmptyView {

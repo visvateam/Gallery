@@ -262,13 +262,13 @@ extension ImagesController: UICollectionViewDataSource, UICollectionViewDelegate
         cell.frameView.alpha = 1
         
         cell.frameView.transform = CGAffineTransform.init(scaleX: 0.0, y: 0.0)
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7,
+        UIView.animate(withDuration: Config.Grid.Animation.SelectTime, delay: 0, usingSpringWithDamping: 0.7,
                        initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
                         cell.frameView.transform = .identity
         }, completion: nil)
     }
     func deselectAnimate(cell: ImageCell) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7,
+        UIView.animate(withDuration: Config.Grid.Animation.DeselectTime, delay: 0, usingSpringWithDamping: 0.7,
                        initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
                         cell.frameView.transform = CGAffineTransform.init(scaleX: 0.01, y: 0.01)
                         cell.frameView.alpha = 0
