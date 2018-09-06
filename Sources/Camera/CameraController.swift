@@ -104,7 +104,10 @@ class CameraController: UIViewController {
   }
 
   @objc func shutterButtonTouched(_ button: ShutterButton) {
-    guard isBelowImageLimit() else { return }
+    guard isBelowImageLimit() else {
+        EventHub.shared.triedToSelectMoreImagesThanMaxAllowed?()
+        return
+    }
     guard let previewLayer = cameraView.previewLayer else { return }
 
     button.isEnabled = false

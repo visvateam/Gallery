@@ -15,4 +15,5 @@ class EventHub {
   var doneWithVideos: Action?
   var stackViewTouched: Action?
   var updateNumImagesSelected: Action?
+  var triedToSelectMoreImagesThanMaxAllowed: Action?
 }

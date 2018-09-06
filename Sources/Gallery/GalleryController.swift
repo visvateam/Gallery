@@ -8,11 +8,14 @@ public protocol GalleryControllerDelegate: class {
   func galleryController(_ controller: GalleryController, requestLightbox images: [Image])
   func galleryControllerDidCancel(_ controller: GalleryController)
   func galleryControllerUpdateNumImagesSelected(_ controller: GalleryController, countImages count: Int)
+  func galleryControllerTriedToSelectMoreThanMaxImges(_ controller: GalleryController)
+
 }
 
 public class GalleryController: UIViewController, PermissionControllerDelegate {
 
   public weak var delegate: GalleryControllerDelegate?
+  private weak var pagesController: PagesController?
 
   public let cart = Cart()
 
@@ -101,7 +104,7 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
 
     let controller = PagesController(controllers: controllers)
     controller.selectedIndex = tabsToShow.index(of: Config.initialTab ?? .cameraTab) ?? 0
-
+    pagesController = controller
     return controller
   }
 
@@ -136,12 +139,23 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
     EventHub.shared.stackViewTouched = { [weak self] in
       if let strongSelf = self {
         strongSelf.delegate?.galleryController(strongSelf, requestLightbox: strongSelf.cart.images)
+        if Config.Camera.selectingStackViewOpensGrid {
+            guard let indicator = strongSelf.pagesController?.pageIndicator else {
+                return
+            }
+            strongSelf.pagesController?.pageIndicator(indicator, didSelect: 0)
+        }
       }
     }
     EventHub.shared.updateNumImagesSelected = { [weak self] in
       if let strongSelf = self {
         strongSelf.delegate?.galleryControllerUpdateNumImagesSelected(strongSelf, countImages: strongSelf.cart.images.count)
       }
+    }
+    EventHub.shared.triedToSelectMoreImagesThanMaxAllowed = { [weak self] in
+        if let strongSelf = self {
+            strongSelf.delegate?.galleryControllerTriedToSelectMoreThanMaxImges(strongSelf)
+        }
     }
   }
 
