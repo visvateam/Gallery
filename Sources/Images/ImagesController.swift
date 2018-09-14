@@ -253,7 +253,7 @@ extension ImagesController: UICollectionViewDataSource, UICollectionViewDelegate
 
     if let index = cart.images.index(of: item) {
       cell.frameView.g_quickFade()
-      //cell.frameView.label.text = "\(index + 1)"
+      cell.frameView.label.text = "\(index + 1)"
     } else {
       cell.frameView.alpha = 0
     }
