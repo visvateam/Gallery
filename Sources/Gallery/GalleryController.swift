@@ -9,7 +9,7 @@ public protocol GalleryControllerDelegate: class {
   func galleryControllerDidCancel(_ controller: GalleryController)
   func galleryControllerUpdateNumImagesSelected(_ controller: GalleryController, countImages count: Int)
   func galleryControllerTriedToSelectMoreThanMaxImges(_ controller: GalleryController)
-
+  func galleryControllerUserPanned(_ controller: GalleryController)
 }
 
 public class GalleryController: UIViewController, PermissionControllerDelegate {
@@ -155,6 +155,11 @@ public class GalleryController: UIViewController, PermissionControllerDelegate {
     EventHub.shared.triedToSelectMoreImagesThanMaxAllowed = { [weak self] in
         if let strongSelf = self {
             strongSelf.delegate?.galleryControllerTriedToSelectMoreThanMaxImges(strongSelf)
+        }
+    }
+    EventHub.shared.userPanned = { [weak self] in
+        if let strongSelf = self {
+            strongSelf.delegate?.galleryControllerUserPanned(strongSelf)
         }
     }
   }

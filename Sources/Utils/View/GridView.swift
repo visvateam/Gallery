@@ -33,6 +33,7 @@ class GridView: UIView {
   private func setup() {
     [collectionView, bottomView, topView, emptyView, loadingIndicator].forEach {
       addSubview($0)
+      setupPanGesture(with: $0)
     }
     
     if Config.CloseButton.usingExternalCloseButton {
@@ -97,10 +98,26 @@ class GridView: UIView {
         doneButton.g_pin(on: .centerY)
         doneButton.g_pin(on: .right, constant: -38)
     }
+    
+    setupPanGesture(with: self)
+    setupPanGesture(with: topView)
+  }
+    
+  private func setupPanGesture(with view: UIView?) {
+    guard let view = view else { return }
+    let edgeGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(userPanning))
+    edgeGestureRecognizer.edges = UIRectEdge.left
+    view.addGestureRecognizer(edgeGestureRecognizer)
   }
 
   // MARK: - Controls
 
+  @objc private func userPanning(pan: UIScreenEdgePanGestureRecognizer) {
+    if pan.state == .recognized {
+        EventHub.shared.userPanned?()
+    }
+  }
+    
   private func makeTopView() -> UIView {
     let view = UIView()
     view.backgroundColor = Config.Grid.TopView.barBackgroundColor

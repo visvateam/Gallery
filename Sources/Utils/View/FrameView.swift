@@ -50,7 +50,7 @@ class FrameView: UIView {
     
   private func makeLabel() -> UILabel {
     let label = UILabel()
-    label.font = Config.Font.Main.regular//.withSize(40)
+    label.font = Config.Grid.SelectedImage.LabelFont
     label.textColor = UIColor.white
 
     return label

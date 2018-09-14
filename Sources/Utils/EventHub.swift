@@ -16,4 +16,5 @@ class EventHub {
   var stackViewTouched: Action?
   var updateNumImagesSelected: Action?
   var triedToSelectMoreImagesThanMaxAllowed: Action?
+  var userPanned: Action?
 }
