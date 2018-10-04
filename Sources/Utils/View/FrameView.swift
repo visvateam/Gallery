@@ -2,7 +2,7 @@ import UIKit
 
 class FrameView: UIView {
 
-//  lazy var label: UILabel = self.makeLabel()
+  lazy var label: UILabel = self.makeLabel()
 //  lazy var gradientLayer: CAGradientLayer = self.makeGradientLayer()
   lazy var selectedImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Config.Grid.SelectedImage.Width, height: Config.Grid.SelectedImage.Height))
     
@@ -21,8 +21,12 @@ class FrameView: UIView {
   // MARK: - Setup
 
   private func setup() {
-    selectedImageView.image = Config.Grid.SelectedImage.ImageIcon
+    selectedImageView.layer.addSublayer(makeShareLayer())
     addSubview(selectedImageView)
+    selectedImageView.g_pinCenter()
+    
+    addSubview(label)
+    label.g_pinCenter()
   }
 
   // MARK: - Layout
@@ -34,13 +38,23 @@ class FrameView: UIView {
 
   // MARK: - Controls
 
-//  private func makeLabel() -> UILabel {
-//    let label = UILabel()
-//    label.font = Config.Font.Main.regular//.withSize(40)
-//    label.textColor = UIColor.white
-//
-//    return label
-//  }
+    private func makeShareLayer() -> CAShapeLayer {
+        
+        let circlePath = UIBezierPath(arcCenter: CGPoint(x: 0, y: 0), radius: CGFloat(Config.Grid.SelectedImage.CircleRadius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.fillColor = Config.Grid.SelectedImage.CircleFillColor.cgColor
+        
+        return shapeLayer
+    }
+    
+  private func makeLabel() -> UILabel {
+    let label = UILabel()
+    label.font = Config.Grid.SelectedImage.LabelFont
+    label.textColor = UIColor.white
+
+    return label
+  }
 //
 //  private func makeGradientLayer() -> CAGradientLayer {
 //    let layer = CAGradientLayer()

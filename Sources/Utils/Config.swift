@@ -51,6 +51,8 @@ public struct Config {
     }
     
     public static var imageLimit: Int = 0
+    public static var StartingSelectedCount: Int = 0
+    public static var selectingStackViewOpensGrid: Bool = true
     
   }
 
@@ -98,6 +100,9 @@ public struct Config {
         public static var ImageIcon: UIImage? = nil
         public static var Width: CGFloat = 0
         public static var Height: CGFloat = 0
+        public static var CircleFillColor: UIColor = .red
+        public static var CircleRadius: CGFloat = 10
+        public static var LabelFont: UIFont = UIFont.systemFont(ofSize: 5)
     }
     
     public struct Animation {
