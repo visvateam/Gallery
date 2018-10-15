@@ -25,19 +25,18 @@ extension Image {
     let options = PHImageRequestOptions()
     options.isNetworkAccessAllowed = true
     options.deliveryMode = .highQualityFormat
-
-    
+    options.resizeMode = .exact
+    options.isSynchronous = true
     let targetSize = size ?? CGSize(
         width: asset.pixelWidth,
         height: asset.pixelHeight
-        )
-    
+    )
     PHImageManager.default().requestImage(
-      for: asset,
-      targetSize: targetSize,
-      contentMode: .default,
-      options: options) { (image, _) in
-        completion(image)
+        for: asset,
+        targetSize: targetSize,
+        contentMode: .aspectFit,
+        options: options) { (image, _) in
+            completion(image)
     }
   }
 
