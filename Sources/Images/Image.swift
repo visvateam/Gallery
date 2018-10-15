@@ -21,16 +21,17 @@ extension Image {
   ///
   /// - Parameter size: The target size
   /// - Returns: The resolved UIImage, otherwise nil
-  public func resolve(completion: @escaping (UIImage?) -> Void) {
+    public func resolve(size: CGSize? = nil, completion: @escaping (UIImage?) -> Void) {
     let options = PHImageRequestOptions()
     options.isNetworkAccessAllowed = true
     options.deliveryMode = .highQualityFormat
 
-    let targetSize = CGSize(
-      width: asset.pixelWidth,
-      height: asset.pixelHeight
-    )
-
+    
+    let targetSize = size ?? CGSize(
+        width: asset.pixelWidth,
+        height: asset.pixelHeight
+        )
+    
     PHImageManager.default().requestImage(
       for: asset,
       targetSize: targetSize,
@@ -46,14 +47,16 @@ extension Image {
   ///   - images: The array of Image
   ///   - size: The target size for all images
   ///   - completion: Called when operations completion
-  public static func resolve(images: [Image], completion: @escaping ([UIImage?]) -> Void) {
+  public static func resolve(images: [Image],
+                             size: CGSize? = nil,
+                             completion: @escaping ([UIImage?]) -> Void) {
     let dispatchGroup = DispatchGroup()
     var convertedImages = [Int: UIImage]()
 
     for (index, image) in images.enumerated() {
       dispatchGroup.enter()
 
-      image.resolve(completion: { resolvedImage in
+        image.resolve(size: size, completion: { resolvedImage in
         if let resolvedImage = resolvedImage {
           convertedImages[index] = resolvedImage
         }
