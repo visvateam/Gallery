@@ -151,7 +151,7 @@ class GridView: UIView {
 
   private func makeCloseButton() -> UIButton {
     let button = UIButton(type: .custom)
-    button.setImage(GalleryBundle.image("gallery_close")?.withRenderingMode(.alwaysTemplate), for: UIControlState.normal)
+    button.setImage(GalleryBundle.image("gallery_close")?.withRenderingMode(.alwaysTemplate), for: UIControl.State.normal)
     button.tintColor = Config.Grid.CloseButton.tintColor
 
     return button
@@ -159,10 +159,10 @@ class GridView: UIView {
 
   private func makeDoneButton() -> UIButton {
     let button = UIButton(type: .system)
-    button.setTitleColor(UIColor.white, for: UIControlState.normal)
+    button.setTitleColor(UIColor.white, for: UIControl.State.normal)
     button.setTitleColor(UIColor.lightGray, for: .disabled)
     button.titleLabel?.font = Config.Font.Text.regular.withSize(16)
-    button.setTitle("Gallery.Done".g_localize(fallback: "Done"), for: UIControlState.normal)
+    button.setTitle("Gallery.Done".g_localize(fallback: "Done"), for: UIControl.State.normal)
     
     return button
   }
@@ -186,7 +186,7 @@ class GridView: UIView {
   }
 
   private func makeLoadingIndicator() -> UIActivityIndicatorView {
-    let view = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    let view = UIActivityIndicatorView(style: .whiteLarge)
     view.color = .gray
     view.hidesWhenStopped = true
 
