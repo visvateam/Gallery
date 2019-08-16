@@ -22,8 +22,6 @@ struct Permission {
         return .denied
       case .authorized:
         return .authorized
-      @unknown default:
-        return .denied
       }
     }
 
@@ -36,7 +34,7 @@ struct Permission {
 
   struct Camera {
     static var needsPermission: Bool {
-        return Config.tabsToShow.firstIndex(of: .cameraTab) != nil
+      return Config.tabsToShow.index(of: .cameraTab) != nil
     }
 
     static var status: Status {
@@ -49,8 +47,6 @@ struct Permission {
         return .denied
       case .authorized:
         return .authorized
-      @unknown default:
-        return .denied
       }
     }
 
