@@ -72,7 +72,7 @@ class PageIndicator: UIView {
     button.setTitle(title, for: UIControl.State.normal)
 //    button.setTitleColor(Config.PageIndicator.textColor, for: UIControlState.normal)
 //    button.setTitleColor(UIColor.gray, for: .highlighted)
-  button.setTitleColor(Config.SwitchingButtons.unselectedColor, for: .normal)
+    button.setTitleColor(Config.SwitchingButtons.unselectedColor, for: .normal)
     button.backgroundColor = Config.PageIndicator.backgroundColor
     button.addTarget(self, action: #selector(buttonTouched(_:)), for: .touchUpInside)
     button.titleLabel?.font = buttonFont(false)
@@ -81,8 +81,8 @@ class PageIndicator: UIView {
   }
 
   func makeIndicator() -> UIImageView {
-    let imageView = UIImageView(image: GalleryBundle.image("gallery_page_indicator"))
-
+    let imageView = UIImageView(image: GalleryBundle.image("gallery_page_indicator")?.withRenderingMode(.alwaysTemplate))
+    imageView.tintColor = Config.PageIndicator.indicatorColor
     return imageView
   }
 
